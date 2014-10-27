@@ -1,0 +1,36 @@
+#### GainSpan will be connected FROM a computer/router ####
+
+AT+NSET=192.168.5.1,255.255.255.0,192.168.5.1
+AT+WM=2
+AT+WA=GainSpanPlinio,,6
+AT+DHCPSRVR=1
+AT+WEBPROV=admin,admin
+
+          *WHITH PASSWORD:
+
+AT+NSET=192.168.3.124,255.255.255.0,192.168.3.1
+AT+WPAPSK=limitedAP,1234567890
+AT+WSEC=8
+AT+WAUTH=0
+AT+WM=2
+AT+DHCPSRVR=1
+AT+WA=limitedAP,,6
+AT+DNS=1,www.limitedAP.com
+
+
+**** GainSpan will connect TO a computer/Router ****
+AT+WM=0
+AT+NDHCP=1
+AT+WA=PlinioTestAP,,6
+
+
+//AT+DNSLOOKUP=www.google.com (It will return the IP to be used in AT+HTTPCONF=11,IP)
+
+AT+HTTPCONF=20,Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
+AT+HTTPCONF=7,application/x-www-form-urlencoded
+AT+HTTPCONF=11,192.168.1.100
+AT+HTTPCONF=3,keep-alive
+
+AT+HTTPOPEN=192.168.1.100 (The CID will be returned: <CR><LF>CID<CR><LF>OK<CR><LF>)
+
+AT+HTTPSEND=3,1,10,/index.php?amor=1&odio=2
