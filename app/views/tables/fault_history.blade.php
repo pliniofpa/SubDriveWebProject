@@ -1,5 +1,5 @@
 @extends('templates.jtable_template')
-@section('body')
+@section('table_content')
 <div id="fault_hist" style="width: 6400px;"></div>
 	<script type="text/javascript">
 

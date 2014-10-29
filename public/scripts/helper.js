@@ -1,6 +1,10 @@
 /**
- * 
+ * Written by Plínio Andrade
+ * <pandrade@fele.com>
+ * <pliniofernando@hotmail.com>
+ * This file contains helper functions for SubDrive Web System
  */
+//Resizes the Headers of jTable regarding the number of characters.
 function resize_headers(){
 	var lengths = [];
 	var i=0;

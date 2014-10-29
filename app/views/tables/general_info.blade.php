@@ -1,5 +1,11 @@
 @extends('templates.jtable_template')
-@section('body')
+@section('title')
+{{" - General Info $serial_number"}}
+@stop
+@section('header')
+{{"General Info $serial_number"}}
+@stop
+@section('table_content')
 <div id="general_info" style="width: 5600px;"></div>
 	<script type="text/javascript">
 
@@ -184,4 +190,4 @@
 
 		});
 	</script>
-	@stop
+@stop

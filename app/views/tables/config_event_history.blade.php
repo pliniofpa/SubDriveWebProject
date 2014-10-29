@@ -1,5 +1,5 @@
 @extends('templates.jtable_template')
-@section('body')
+@section('table_content')
 <div id="config_event_history" style="width: 2400px;"></div>
 	<script type="text/javascript">
 

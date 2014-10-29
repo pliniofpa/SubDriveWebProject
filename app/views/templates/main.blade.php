@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- app/views/templates/main.blade.php -->
+
 <html lang="en">
 <head>
 
@@ -9,29 +10,41 @@
     <meta name="author" content="Plínio Andrade">
 
     <title>SubDrive Web System @yield('title')</title>
-
     <!-- Bootstrap Core CSS -->
-    <link href="sb-admin-2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('sb-admin-2/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="sb-admin-2/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="{{asset('sb-admin-2/css/plugins/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="sb-admin-2/css/plugins/timeline.css" rel="stylesheet">
+    <link href="{{asset('sb-admin-2/css/plugins/timeline.css')}}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="sb-admin-2/css/sb-admin-2.css" rel="stylesheet">    
+    <link href="{{asset('sb-admin-2/css/sb-admin-2.css')}}" rel="stylesheet">    
 
     <!-- Custom Fonts -->
-    <link href="sb-admin-2/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link href="{{asset('sb-admin-2/font-awesome-4.1.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <!-- jQuery Version 1.11.0 -->
+    <script src="{{asset('sb-admin-2/js/jquery-1.11.0.js')}}"></script>
+    
+     <!-- Bootstrap Core JavaScript -->
+    <script src="{{asset('sb-admin-2/js/bootstrap.min.js')}}"></script>
 
+     <!-- Metis Menu Plugin JavaScript -->
+    <script src="{{asset('sb-admin-2/js/plugins/metisMenu/metisMenu.min.js')}}"></script>
+    
+    <!-- Custom Theme JavaScript -->
+    <script src="{{asset('sb-admin-2/js/sb-admin-2.js')}}"></script>   
+@yield('head')
 </head>
 
 <body>
@@ -47,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="sb-admin-2/index.html">SubDrive Web System</a>
+                <a class="navbar-brand" href='{{URL::to("/")}}'>SubDrive Web System</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -294,7 +307,7 @@
                             <a href="#"><i class="fa fa-table fa-fw"></i>Tables<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">General Info</a>
+                                    <a href='{{URL::route("show_table_route",array("general_info","serial_number"))}}'>General Info</a>
                                 </li>
                                 <li>
                                     <a href="#">Fault Event History</a>
@@ -399,10 +412,10 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Header @yield('header')</h1>
+                    <h1 class="page-header">@yield('header')</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <div id='content'>@yield('content')</div>
+                <div id='content' >@yield('content')</div>
             </div>
             <!-- /.row -->
             
@@ -413,17 +426,12 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery Version 1.11.0 -->
-    <script src="sb-admin-2/js/jquery-1.11.0.js"></script>
+    
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="sb-admin-2/js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="sb-admin-2/js/plugins/metisMenu/metisMenu.min.js"></script>
+   
 
-    <!-- Custom Theme JavaScript -->
-    <script src="sb-admin-2/js/sb-admin-2.js"></script>
+    
 
 </body>
 
