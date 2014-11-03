@@ -1,36 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- app/views/templates/main.blade.php -->
 
+<html lang="en">
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="SubDrive Web System">
+    <meta name="author" content="Plínio Andrade">
 
     <title>SubDrive Web System @yield('title')</title>
-
     <!-- Bootstrap Core CSS -->
-    <link href="{{asset('sb-admin-2/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('sb-admin-2/css/bootstrap.css')}}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="{{asset('sb-admin-2/css/plugins/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
 
+    <!-- Timeline CSS -->
+    <link href="{{asset('sb-admin-2/css/plugins/timeline.css')}}" rel="stylesheet">
+
     <!-- Custom CSS -->
-    <link href="{{asset('sb-admin-2/css/sb-admin-2.css')}}" rel="stylesheet">
+    <link href="{{asset('sb-admin-2/css/sb-admin-2.css')}}" rel="stylesheet">    
 
     <!-- Custom Fonts -->
     <link href="{{asset('sb-admin-2/font-awesome-4.1.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-
+    
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  
-  <!-- jQuery Version 1.11.0 -->
+    
+    <!-- jQuery Version 1.11.0 -->
     <script src="{{asset('sb-admin-2/js/jquery.js')}}"></script>
     
      <!-- Bootstrap Core JavaScript -->
@@ -40,7 +43,8 @@
     <script src="{{asset('sb-admin-2/js/plugins/metisMenu/metisMenu.min.js')}}"></script>
     
     <!-- Custom Theme JavaScript -->
-    <script src="{{asset('sb-admin-2/js/sb-admin-2.js')}}"></script>
+    <script src="{{asset('sb-admin-2/js/sb-admin-2.js')}}"></script>   
+@yield('head')
 </head>
 
 <body>
@@ -56,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href='{{URL::to("/")}}'>SubDrive Web System</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -261,7 +265,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="sb-admin-2/login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -285,16 +289,16 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a class="active" href="sb-admin-2/index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="sb-admin-2/flot.html">Flot Charts</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="sb-admin-2/morris.html">Morris.js Charts</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -333,25 +337,25 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="sb-admin-2/forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
+                                    <a href="sb-admin-2/panels-wells.html">Panels and Wells</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Buttons</a>
+                                    <a href="sb-admin-2/buttons.html">Buttons</a>
                                 </li>
                                 <li>
-                                    <a href="notifications.html">Notifications</a>
+                                    <a href="sb-admin-2/notifications.html">Notifications</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">Typography</a>
+                                    <a href="sb-admin-2/typography.html">Typography</a>
                                 </li>
                                 <li>
-                                    <a href="grid.html">Grid</a>
+                                    <a href="sb-admin-2/grid.html">Grid</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -386,14 +390,14 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a class="active" href="blank.html">Blank Page</a>
+                                    <a href="{{asset('sb-admin-2/blank.html')}}">Blank Page</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Login Page</a>
+                                    <a href="sb-admin-2/login.html">Login Page</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -405,15 +409,17 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <!-- Page Content -->
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blank - @yield('header')</h1>
+                    <h1 class="page-header">My Header - @yield('header')</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                @yield('content')
+                <div id='content' sytle="overflow-x: 'scoll'">@yield('content')
+                </div>
             </div>
+            <!-- /.row -->
+            
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
@@ -421,9 +427,13 @@
     </div>
     <!-- /#wrapper -->
 
+    
+
+
    
+
+    
 
 </body>
 
 </html>
-

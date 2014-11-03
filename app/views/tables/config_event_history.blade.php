@@ -15,7 +15,8 @@
 					return true;
 					},
 				actions: {
-					listAction: '{{URL::to($table_name."/list/".$serial_number)}}'
+					//listAction: '{{URL::to($table_name."/list/".$serial_number)}}'
+					listAction: '{{URL::route("tables_data_list",array($table_name,$serial_number))}}'
 				},
 				fields: {
 					id: {

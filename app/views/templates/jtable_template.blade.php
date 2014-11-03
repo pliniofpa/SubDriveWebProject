@@ -1,12 +1,13 @@
 <!-- app/views/templates/jtable_template.blade.php -->
-@extends('templates.main')
-
+@extends('templates.main')    
 {{-- Populate head section on main template with needed scripts. --}}
 @section('head')
 
 	<!-- jTable CSS -->
 	<link href="{{asset('scripts/jquery-ui-1.11.1/jquery-ui.css')}}" rel="stylesheet" type="text/css" />
 	<link href="{{asset('scripts/jtable-2.4.0/themes/metro/blue/jtable.css')}}" rel="stylesheet" type="text/css" />
+	<link href="{{asset('scripts/helper.css')}}" rel="stylesheet" type="text/css" />
+	
 	
 	<!-- jTable JavaScript -->	
     <script src="{{asset('scripts/jquery-ui-1.11.1/jquery-ui.min.js')}}" type="text/javascript"></script>

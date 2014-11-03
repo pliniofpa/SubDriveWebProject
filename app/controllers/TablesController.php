@@ -14,13 +14,26 @@ class TablesController extends BaseController {
 	 * |
 	 */
 	public function listdata() {
-		$rows = DB::table (Route::input('table_name'))->count();//->where('serial_number',"==",Route::input('serial_number'))->count();
+		//Recoveres the ID of the SubDrive for a given Serial Number
+		$subdrive_id = null;
+		$subdrive_first_row = DB::table('subdrives')->where('serial_number',Route::input('serial_number'))->first();
+		if($subdrive_first_row){
+			$subdrive_id = $subdrive_first_row->id;
+		}
+		//$subdrive_id = 1;
+		$rows = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->count();//->where('serial_number',"==",Route::input('serial_number'))->count();
 		
 		if (Input::get ( "jtSorting" )) {
 			$search = explode ( " ", Input::get ( "jtSorting" ) );
-			$data = DB::table (Route::input('table_name'))->skip ( Input::get ( "jtStartIndex" ) )->take ( Input::get ( "jtPageSize" ) )->orderBy ( $search [0], $search [1] )->get ();
+			if(Input::get ( "jtStartIndex" ) && Input::get ( "jtPageSize" ))
+				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->skip ( Input::get ( "jtStartIndex" ) )->take ( Input::get ( "jtPageSize" ) )->orderBy ( $search [0], $search [1] )->get ();
+			else
+				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->orderBy ( $search [0], $search [1] )->get ();
 		} else {
-			$data = DB::table (Route::input('table_name'))->skip ( Input::get ( "jtStartIndex" ) )->take ( Input::get ( "jtPageSize" ) )->get ();
+			if(Input::get ( "jtStartIndex" ) && Input::get ( "jtPageSize" ))
+				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->skip ( Input::get ( "jtStartIndex" ) )->take ( Input::get ( "jtPageSize" ) )->get ();
+			else
+				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->get ();
 		}
 		
 		//$data = DB::table (Route::input('table_name'))->get();

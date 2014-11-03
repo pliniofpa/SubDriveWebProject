@@ -13,6 +13,18 @@ class ImportingController extends BaseController {
 	 * |	Route::get('/', 'ImportingController@importGeneralInfo');
 	 * |
 	 */
+	
+	// Convert an amount of Seconds to Days, Hours, and Minutes
+	function ConverttoDHM($timeOnSeconds, $type = "total") {
+		$return_array = array ();
+		if (($type == "total" || $type = "this_cycle") && $timeOnSeconds!=null) {
+			$return_array [$type . "_on_days"] = $timeOnSeconds / 60 / 60 / 24;
+			$return_array [$type . "_on_hours"] = (($timeOnSeconds % (24 * 60 * 60)) / 60 / 60);
+			$return_array [$type . "_on_minutes"] = (($timeOnSeconds % (60 * 60)) / 60);
+		}
+		
+		return $return_array;
+	}
 	public function importGeneralInfo() {
 		$assoc_array = array ();
 		// Fields for Drive Status
@@ -48,21 +60,21 @@ class ImportingController extends BaseController {
 		}
 		// Fields for Serial Number
 		/*
-		$serial = null;
-		for($i = 0; $i < 12; $i ++) {
-			if ($i < 9) {
-				$key = 'SN0' . (( string ) $i);
-			} else {
-				$key = 'SN' . (( string ) $i);
-			}
-			if (array_key_exists ( $key, Input::all () )) {
-				if ($serial == null) {
-					$serial = '';
-				}
-				$serial .= Input::get ( $key );
-			}
-		}
-		*/
+		 * $serial = null;
+		 * for($i = 0; $i < 12; $i ++) {
+		 * if ($i < 9) {
+		 * $key = 'SN0' . (( string ) $i);
+		 * } else {
+		 * $key = 'SN' . (( string ) $i);
+		 * }
+		 * if (array_key_exists ( $key, Input::all () )) {
+		 * if ($serial == null) {
+		 * $serial = '';
+		 * }
+		 * $serial .= Input::get ( $key );
+		 * }
+		 * }
+		 */
 		// Fields for MCB SW
 		if (array_key_exists ( 'MBS0', Input::all () ) && array_key_exists ( 'MBS1', Input::all () )) {
 			$assoc_array ['mcb_sw_version'] = Input::get ( 'MBS0' ) . Input::get ( 'MBS1' );
@@ -85,7 +97,6 @@ class ImportingController extends BaseController {
 				'output_frequency' => Input::get ( 'FOUT' ) == null ? null : ( float ) Input::get ( 'FOUT' ),
 				'maximum_frequency' => Input::get ( 'MXFQ' ) == null ? null : ( float ) Input::get ( 'MXFQ' ),
 				'minimum_frequency' => Input::get ( 'MNFQ' ) == null ? null : ( float ) Input::get ( 'MNFQ' ),
-				'hardware_version' => Input::get ( 'VIN1' ) == null ? null : ( float ) Input::get ( 'VIN1' ),
 				'demand' => Input::get ( 'DMND' ) == null ? null : ( float ) Input::get ( 'DMND' ),
 				'serial_number' => Input::get ( 'SN' ),
 				'motor_size' => Input::get ( 'MTSW' ),
@@ -97,25 +108,50 @@ class ImportingController extends BaseController {
 				'language' => Input::get ( 'LANG' ),
 				'package_id' => Input::get ( 'PKID' ),
 				'model_number' => Input::get ( 'MDNR' ),
-				'subdrive_id' => Input::get ( 'HWVR' ) 
+				'hardware_version' => Input::get ( 'HWVR' ) 
 		);
-		//$subdrive_id = DB::table('subdrives')->where('serial_number',"==",Route::input('serial_number'))->id;
+		// $subdrive_id = DB::table('subdrives')->where('serial_number',"==",Route::input('serial_number'))->id;
 		$subdrive_id = 1;
-		$assoc_array['subdrive_id'] = $subdrive_id;
-		$ok = DB::table ('general_info')->insert($assoc_array);//->where('serial_number',"=",Route::input('serial_number'))->count ();
-		if($ok){
-			$count=0;
-			foreach (Input::all() as $key => $value){
-				$count+=strlen($value);
+		$assoc_array ['subdrive_id'] = $subdrive_id;
+		$ok = DB::table ( 'general_info' )->insert ( $assoc_array ); // ->where('serial_number',"=",Route::input('serial_number'))->count ();
+		if ($ok) {
+			$count = 0;
+			foreach ( Input::all () as $key => $value ) {
+				$count += strlen ( $value );
 			}
 			return $count;
-		}else{
+		} else {
 			return "Error while saving data to database!";
 		}
 	}
-	
-	
 	public function importCommunicationHistory() {
-		
+		$assoc_array = array ();
+		$assoc_array += ConverttoDHM(Input::get ( 'TOTTIME' ),'total');
+		$assoc_array += ConverttoDHM(Input::get ( 'CYCLETIME' ),'this_cycle');
+		$assoc_array += array (
+				'log_number' => Input::get ( 'LOGN' ) == null ? null : ( int ) Input::get ( 'LOGN' ),
+				'dwb_total_errors' => Input::get ( 'DWBTERR' ) == null ? null : (( int ) Input::get ( 'DWBTERR' )),
+				'dwb_errors_at_powerup' => Input::get ( 'DWBERRP' ) == null ? null : (( int ) Input::get ( 'DWBEPU' )),
+				'dwb_errors_on_this_cycle' => Input::get ( 'DWBERRC' ) == null ? null : ( int ) Input::get ( 'DWBERRC' ),
+				'exb_total_errors' => Input::get ( 'EXBTERR' ) == null ? null : (( int ) Input::get ( 'EXBTERR' )),
+				'exb_errors_at_powerup' => Input::get ( 'EXBEPU' ) == null ? null : (( int ) Input::get ( 'EXBEPU' )),
+				'exb_errors_on_this_cycle' => Input::get ( 'EXBERRC' ) == null ? null : ( int ) Input::get ( 'EXBERRC' ),
+				'mcb_total_errors' => Input::get ( 'MCBTERR' ) == null ? null : (( int ) Input::get ( 'MCBTERR' )),
+				'mcb_errors_at_powerup' => Input::get ( 'MCBERRP' ) == null ? null : (( int ) Input::get ( 'MCBERRP' )),
+				'mcb_errors_on_this_cycle' => Input::get ( 'MCBERRC' ) == null ? null : ( int ) Input::get ( 'MCBERRC' ) 
+		);		
+		// $subdrive_id = DB::table('subdrives')->where('serial_number',"==",Route::input('serial_number'))->id;
+		$subdrive_id = 1;
+		$assoc_array ['subdrive_id'] = $subdrive_id;
+		$ok = DB::table ( 'communication_event_history' )->insert ( $assoc_array ); // ->where('serial_number',"=",Route::input('serial_number'))->count ();
+		if ($ok) {
+			$count = 0;
+			foreach ( Input::all () as $key => $value ) {
+				$count += strlen ( $value );
+			}
+			return $count;
+		} else {
+			return "Error while saving data to database!";
+		}
 	}
 }
