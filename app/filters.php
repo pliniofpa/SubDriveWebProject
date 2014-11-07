@@ -1,4 +1,10 @@
 <?php
+/*
+ * Author: Plínio Andrade <pandrade@fele.com>
+ * Company: Franklin Electric
+ * Date: 10/20/2014
+ * Application: SubDrive Web System
+ */
 
 /*
 |--------------------------------------------------------------------------

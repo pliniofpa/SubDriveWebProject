@@ -21,7 +21,7 @@ class TablesController extends BaseController {
 			$subdrive_id = $subdrive_first_row->id;
 		}
 		//$subdrive_id = 1;
-		$rows = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->count();//->where('serial_number',"==",Route::input('serial_number'))->count();
+		$rows = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->count();
 		
 		if (Input::get ( "jtSorting" )) {
 			$search = explode ( " ", Input::get ( "jtSorting" ) );

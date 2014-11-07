@@ -1,4 +1,10 @@
 <?php
+/*
+ * Author: Plínio Andrade <pandrade@fele.com>
+ * Company: Franklin Electric
+ * Date: 10/20/2014
+ * Application: SubDrive Web System
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +37,20 @@ Route::any('importing/general_info/{serial_number}', array('as' => 'importing_da
 //Import Data to Communication Event History Table  Route
 Route::any('importing/communication_event_history/{serial_number}', array('as' => 'importing_data_to_communication_event_history_table','uses'=> 'ImportingController@importCommunicationHistory'));
 
+//Import Data to Config Event History Table  Route
+Route::any('importing/config_event_history/{serial_number}', array('as' => 'importing_data_to_config_event_history_table','uses'=> 'ImportingController@importConfigHistory'));
 
+//Import Data to Current Limit Event History Table  Route
+Route::any('importing/current_limit_event_history/{serial_number}', array('as' => 'importing_data_to_communication_event_history_table','uses'=> 'ImportingController@importCurrentLimitHistory'));
 
-//Teste
+//Import Data to Fault History Table  Route
+Route::any('importing/fault_history/{serial_number}', array('as' => 'importing_data_to_fault_history_table','uses'=> 'ImportingController@importFaultHistory'));
+
+//Import Data to Motor On time Event History Table  Route
+Route::any('importing/motor_on_time_event_history/{serial_number}', array('as' => 'importing_motor_on_time_event_history_table','uses'=> 'ImportingController@importMotorOnTimeHistory'));
+
+//Import Data to Overload History Table  Route
+Route::any('importing/overload_history/{serial_number}', array('as' => 'importing_overload_history_table','uses'=> 'ImportingController@importOverloadHistory'));
+
+//Import Data to Power On Time Event History Table  Route
+Route::any('importing/power_on_time_event_history/{serial_number}', array('as' => 'importing_power_on_time_event_history_table','uses'=> 'ImportingController@importPowerOnTimeHistory'));
