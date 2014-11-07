@@ -1,6 +1,6 @@
 @extends('templates.jtable_template')
 @section('table_content')
-<div id="motor_on_time_event_history" style="width: 2400px;"></div>
+<div id="motor_on_time_event_history" style="width: parent.width;"></div>
 	<script type="text/javascript">
 
 		$(document).ready(function () 

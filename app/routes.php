@@ -54,3 +54,9 @@ Route::any('importing/overload_history/{serial_number}', array('as' => 'importin
 
 //Import Data to Power On Time Event History Table  Route
 Route::any('importing/power_on_time_event_history/{serial_number}', array('as' => 'importing_power_on_time_event_history_table','uses'=> 'ImportingController@importPowerOnTimeHistory'));
+
+//Import Data to Reset Event History Table  Route
+Route::any('importing/reset_event_history/{serial_number}', array('as' => 'importing_reset_event_history_table','uses'=> 'ImportingController@importResetHistory'));
+
+//Import Data to Temperature Event History Table  Route
+Route::any('importing/temperature_event_history/{serial_number}', array('as' => 'importing_temperature_event_history_table','uses'=> 'ImportingController@importTemperatureHistory'));

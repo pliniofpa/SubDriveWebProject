@@ -526,4 +526,83 @@ class ImportingController extends BaseController {
 			return "Error while saving data to database!";
 		}
 	}
+	
+	// Controller of importing data to Reset Event History Table
+	public function importResetHistory() {
+		$assoc_array = array ();
+		$assoc_array += ImportingController::converttoDHM ( 'total' );
+		$assoc_array += ImportingController::converttoDHM ( 'this_cycle' );
+	
+		$assoc_array += array (
+				'log_number' => Input::get ( 'LOGN' ) == null ? null : ( int ) Input::get ( 'LOGN' ),
+				'reset_source' => Input::get ( 'RSTSRC' ),
+				'reset_type' => Input::get ( 'RSTTYPE' )				
+		);
+	
+		$subdrive_record = DB::table ( 'subdrives' )->where ( 'serial_number', Route::input ( 'serial_number' ) );
+		$subdrive_id = 1;
+		if ($subdrive_record) {
+			$subdrive_id = $subdrive_record->id;
+		}
+		$assoc_array ['subdrive_id'] = $subdrive_id;
+		$ok = DB::table ( 'reset_event_history' )->insert ( $assoc_array ); // ->where('serial_number',"=",Route::input('serial_number'))->count ();
+		if ($ok) {
+			$count = 0;
+			foreach ( Input::all () as $key => $value ) {
+				$count += strlen ( $value );
+			}
+			return $count;
+		} else {
+			return "Error while saving data to database!";
+		}
+	}
+	
+	// Controller of importing data to Temperature Event History Table
+	public function importTemperatureHistory() {
+		$assoc_array = array ();
+		$assoc_array += ImportingController::converttoDHM ( 'total' );
+		$assoc_array += ImportingController::converttoDHM ( 'this_cycle' );
+	
+		// Fields for a set of Total Events /*FaultEventInfo[5] and FaultEventInfo[4] */
+		if (array_key_exists ( 'TEVENMSB', Input::all () ) && array_key_exists ( 'TEVENLSB', Input::all () )) {
+			$tempValue = ( double ) ((( int ) Input::get ( 'TEVENMSB' )) * 65536 + (( int ) Input::get ( 'TEVENLSB' )));
+			$assoc_array ['total_events'] = $tempValue;
+		}
+		
+		// Fields for a set of Total Events On This Cycle /*FaultEventInfo[7] and FaultEventInfo[6] */
+		if (array_key_exists ( 'TEVENOCMSB', Input::all () ) && array_key_exists ( 'TEVENOCLSB', Input::all () )) {
+			$tempValue = ( double ) ((( int ) Input::get ( 'TEVENOCMSB' )) * 65536 + (( int ) Input::get ( 'TEVENOCLSB' )));
+			$assoc_array ['total_events_on_this_cycle'] = $tempValue;
+		}
+		
+		// Fields for a set of First Event Start Time /*FaultEventInfo[9] and FaultEventInfo[8] */
+		if (array_key_exists ( 'FEVENSTMSB', Input::all () ) && array_key_exists ( 'FEVENSTLSB', Input::all () )) {
+			$tempValue = ( double ) ((( int ) Input::get ( 'FEVENSTMSB' )) * 65536 + (( int ) Input::get ( 'FEVENSTLSB' )));
+			$assoc_array ['first_event_start_time'] = $tempValue;
+		}
+		
+		$assoc_array += array (
+				'log_number' => Input::get ( 'LOGN' ) == null ? null : ( int ) Input::get ( 'LOGN' ),
+				'reset_source' => Input::get ( 'TEMPSRC' ),
+				'inverter_temperature' => Input::get ( 'ITMP' ) == null ? null : (( float ) Input::get ( 'ITMP' )) / 10,
+				'pfc_temperature' => Input::get ( 'PTMP' ) == null ? null : (( float ) Input::get ( 'PTMP' )) / 10
+		);
+	
+		$subdrive_record = DB::table ( 'subdrives' )->where ( 'serial_number', Route::input ( 'serial_number' ) );
+		$subdrive_id = 1;
+		if ($subdrive_record) {
+			$subdrive_id = $subdrive_record->id;
+		}
+		$assoc_array ['subdrive_id'] = $subdrive_id;
+		$ok = DB::table ( 'temperature_event_history' )->insert ( $assoc_array ); // ->where('serial_number',"=",Route::input('serial_number'))->count ();
+		if ($ok) {
+			$count = 0;
+			foreach ( Input::all () as $key => $value ) {
+				$count += strlen ( $value );
+			}
+			return $count;
+		} else {
+			return "Error while saving data to database!";
+		}
+	}
 }
