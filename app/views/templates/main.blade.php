@@ -36,11 +36,7 @@
      <!-- Bootstrap Core JavaScript -->
     <script src="{{asset('sb-admin-2/js/bootstrap.min.js')}}"></script>
 
-     <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{asset('sb-admin-2/js/plugins/metisMenu/metisMenu.min.js')}}"></script>
-    
-    <!-- Custom Theme JavaScript -->
-    <script src="{{asset('sb-admin-2/js/sb-admin-2.js')}}"></script>
+     
     @yield('head')
 </head>
 
@@ -286,7 +282,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/"><i class="active fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a id="dashboard_link" href=<?php URL::route('main');?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -300,38 +296,38 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <li id="tables_link" class="">
                             <a href="#"><i class="fa fa-table fa-fw"></i>Tables<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("general_info","serial_number"))}}'>General Info</a>
+                                    <a id="general_info_table_link" href='{{URL::route("show_table_route",array("general_info","serial_number"))}}'>General Information</a>
                                 </li>
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("fault_history","serial_number"))}}'>Fault Event History</a>
+                                    <a id="fault_history_table_link" href='{{URL::route("show_table_route",array("fault_history","serial_number"))}}'>Fault Event History</a>
                                 </li>
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("config_event_history","serial_number"))}}'>Configuration Event History</a>
+                                    <a id="config_event_history_table_link" href='{{URL::route("show_table_route",array("config_event_history","serial_number"))}}'>Configuration Event History</a>
                                 </li>
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("current_limit_event_history","serial_number"))}}'>Current Limit Event History</a>
+                                    <a id="current_limit_event_history_table_link" href='{{URL::route("show_table_route",array("current_limit_event_history","serial_number"))}}'>Current Limit Event History</a>
                                 </li>
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("temperature_event_history","serial_number"))}}'>Temperature Event History</a>
+                                    <a id="temperature_event_history_table_link" href='{{URL::route("show_table_route",array("temperature_event_history","serial_number"))}}'>Temperature Event History</a>
                                 </li> 
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("communication_event_history","serial_number"))}}'>Communication Event History</a>
+                                    <a id="communication_event_history_table_link" href='{{URL::route("show_table_route",array("communication_event_history","serial_number"))}}'>Communication Event History</a>
                                 </li> 
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("motor_on_time_event_history","serial_number"))}}'>Motor on Time Event History</a>
+                                    <a id="motor_on_time_event_history_table_link" href='{{URL::route("show_table_route",array("motor_on_time_event_history","serial_number"))}}'>Motor on Time Event History</a>
                                 </li> 
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("overload_history","serial_number"))}}'>Overload Event History</a>
+                                    <a id="overload_history_table_link" href='{{URL::route("show_table_route",array("overload_history","serial_number"))}}'>Overload Event History</a>
                                 </li>
                                 <li>
-                                    <a href='{{URL::route("show_table_route",array("power_on_time_event_history","serial_number"))}}'>Power on Time Event History</a>
+                                    <a id="power_on_time_event_history_table_link" href='{{URL::route("show_table_route",array("power_on_time_event_history","serial_number"))}}'>Power on Time Event History</a>
                                 </li>
                                  <li>
-                                    <a href='{{URL::route("show_table_route",array("reset_event_history","serial_number"))}}'>Reset Event Historyy</a>
+                                    <a id="reset_event_history_table_link" href='{{URL::route("show_table_route",array("reset_event_history","serial_number"))}}'>Reset Event History</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -428,7 +424,11 @@
     </div>
     <!-- /#wrapper -->
 
-   
+<!-- Metis Menu Plugin JavaScript -->
+    <script src="{{asset('sb-admin-2/js/plugins/metisMenu/metisMenu.min.js')}}"></script>
+    
+    <!-- Custom Theme JavaScript -->
+    <script src="{{asset('sb-admin-2/js/sb-admin-2.js')}}"></script>
 
 </body>
 

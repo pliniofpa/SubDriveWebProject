@@ -1,4 +1,10 @@
 @extends('templates.jtable_template')
+@section('title')
+{{" - Overload History - $serial_number"}}
+@stop
+@section('header')
+{{"Overload History - $serial_number"}}
+@stop
 @section('table_content')
 <div id="overload_history" style="width: parent.width;"></div>
 	<script type="text/javascript">
@@ -48,6 +54,11 @@
 
 			//Load general_info list from server
 			$('#overload_history').jtable('load');
+
+			
+			//Set current table menu active
+			$('#tables_link').addClass("active");
+			$('#overload_history_table_link').addClass("active");
 
 		});
 	</script>

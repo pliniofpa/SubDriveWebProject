@@ -1,9 +1,9 @@
 @extends('templates.jtable_template')
 @section('title')
-{{" - General Info $serial_number"}}
+{{" - General Information - $serial_number"}}
 @stop
 @section('header')
-{{"General Info $serial_number"}}
+{{"General Information - $serial_number"}}
 @stop
 @section('table_content')
 <div id="general_info" style="width: 5600px;"></div>
@@ -187,6 +187,10 @@
 
 			//Load general_info list from server
 			$('#general_info').jtable('load');
+			
+			//Set current table menu active
+			$('#tables_link').addClass("active");
+			$('#general_info_table_link').addClass("active");
 
 		});
 	</script>

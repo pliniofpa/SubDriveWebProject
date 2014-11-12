@@ -1,4 +1,10 @@
 @extends('templates.jtable_template')
+@section('title')
+{{" - Motor On Time Event History - $serial_number"}}
+@stop
+@section('header')
+{{"Motor On Time Event History - $serial_number"}}
+@stop
 @section('table_content')
 <div id="motor_on_time_event_history" style="width: parent.width;"></div>
 	<script type="text/javascript">
@@ -64,6 +70,11 @@
 
 			//Load general_info list from server
 			$('#motor_on_time_event_history').jtable('load');
+
+			
+			//Set current table menu active
+			$('#tables_link').addClass("active");
+			$('#motor_on_time_event_history_table_link').addClass("active");
 
 		});
 	</script>

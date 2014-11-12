@@ -17,10 +17,10 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array('as' => 'main',function()
 {
-	return View::make('templates.main');
-});
+	return View::make('dashboard');
+}));
 
 //Tables Show Route - This route show the Jtable 
 Route::get('/{table_name}/{serial_number}', array('as'=>'show_table_route', function ($table_name,$serial_number){

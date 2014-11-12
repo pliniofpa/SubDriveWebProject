@@ -1,4 +1,10 @@
 @extends('templates.jtable_template')
+@section('title')
+{{" - Fault History - $serial_number"}}
+@stop
+@section('header')
+{{"Fault History - $serial_number"}}
+@stop
 @section('table_content')
 <div id="fault_hist" style="width: 6400px;"></div>
 	<script type="text/javascript">
@@ -184,6 +190,10 @@
 
 			//Load general_info list from server
 			$('#fault_hist').jtable('load');
+			
+			//Set current table menu active
+			$('#tables_link').addClass("active");
+			$('#fault_history_table_link').addClass("active");
 
 		});
 	</script>

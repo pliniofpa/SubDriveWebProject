@@ -1,4 +1,10 @@
 @extends('templates.jtable_template')
+@section('title')
+{{" - Temperature Event History - $serial_number"}}
+@stop
+@section('header')
+{{"Temperature Event History - $serial_number"}}
+@stop
 @section('table_content')
 <div id="temperature_event_history" style="width: 2400px;"></div>
 	<script type="text/javascript">
@@ -80,6 +86,12 @@
 
 			//Load general_info list from server
 			$('#temperature_event_history').jtable('load');
+
+
+			
+			//Set current table menu active
+			$('#tables_link').addClass("active");
+			$('#temperature_event_history_table_link').addClass("active");
 
 		});
 	</script>
