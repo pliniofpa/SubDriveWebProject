@@ -1,6 +1,6 @@
 <!-- app/views/dashboard.blade.php -->
 <?php 
-$serial_number = "serial_number";
+$serial_number = "serial_number_for_dashboard";
 ?>
 <script type="text/javascript">
 <!--
@@ -35,8 +35,71 @@ $('#dashboard_link').addClass("active");
 @stop
 
 {{-- Passes content to main template. --}}
+<?php
+$serial_number = '12345678';
+//Recover the last added item from general_info table 
+$general_info_table_last_row = DB::table('general_info')->where('serial_number',$serial_number)->latest()->first();
+//Create array that links table fiels with Labels
+$assoc_array = array(
+		'number' => '#',
+		'hardware_version' => 'Hardware Version',
+		'drive_type_dip_switch' => 'Drive Type Dip Switch',
+		'pot_mode' => 'PotMode',
+		'input_voltage' => 'Input Voltage (V rms)',
+		'output_voltage_a' => 'Output Voltage A (V rms)',
+		'output_voltage_b' => 'Output Voltage B (V rms)',
+		'output_voltage_c' => 'Output Voltage C (V rms)',
+		'output_current_a' => 'Output Current A (I rms)',
+		'output_current_b' => 'Output Current B (I rms)',
+		'output_current_c' => 'Output Current C (I rms)',
+		'output_current_c' => '% Demand',
+		'drive_status' => 'Drive Status',
+		'hp_kw' => 'HP / kW',
+		'fe_connect_dip' => 'FE Connect Dip Switch',
+		'bump' => 'Bump',
+		'agressive_bump' => 'Agressive Bump',
+		'tank_size' => 'Tank Size',
+		'broken_pipe' => 'Broken Pipe',
+		'blurred_carrier' => 'Blurred Carrier',
+		'constant_minimum_fan' => 'Constant Minimum Fan',
+		'serial_number' => 'Serial Number',
+		'motor_size' => 'Motor Size',
+		'pump_size' => 'Pump Size',
+		'steady_flow' => 'Steady Flow',
+		'underload_sense_value' => 'Underload Sensor Value',
+		'underload_hours' => 'Underload Hours',
+		'underload_minutes' => 'Underload Minutes',
+		'underload_seconds' => 'Underload Seconds',
+		'maximum_frequency' => 'Maximum Frequency',
+		'minimum_frequency' => 'Minimum Frequency',
+		'language' => 'Language ',
+		'output_frequency' => 'Output Frenquency',
+		'inverter_temperature' => 'Inverter Temperature (°C)',
+		'pfc_temperature' => 'PFC Temperature (°C)',
+		'mcb_sw_version' => 'DWB S/W Version',
+		'package_id' => 'Package ID',
+		'model_number' => 'Model Number'		
+);
+$result_array = array();
+foreach ($assoc_array as $column => $label){
+	foreach ($general_info_table_last_row as $column_table => $value){
+		if($column==$column_table){
+			$result_array[$label] = $general_info_table_last_row->$column_table;
+			break;
+		}
+	}	
+}
+//var_dump($general_info_table_last_row);
+//var_dump($result_array);
+?>
+
 @section('content')
 	<!-- Content Here -->
+	<div style="overflow: none" class="row">
+	@foreach($result_array as $label => $value)
+	<div class="col-xs-6 col-sm-4 col-lg-3"><b>{{$label.": "}}</b>{{$value}}</div>
+	@endforeach
+	</div>	
 @stop
 
 

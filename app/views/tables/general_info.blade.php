@@ -30,8 +30,8 @@
 						key: true,
 						list: false
 					},
-					request_number: {
-						title: 'Request #  ',
+					number: {
+						title: '#      ',
 						width: '10%'
 					},
 					hardware_version: {
@@ -63,15 +63,15 @@
 						width: '100%'
 					},
 					output_current_a: {
-						title: 'Output Current A (V rms)',
+						title: 'Output Current A (I rms)',
 						width: '100%'
 					},
 					output_current_b: {
-						title: 'Output Current B (V rms)',
+						title: 'Output Current B (I rms)',
 						width: '100%'
 					},
 					output_current_c: {
-						title: 'Output Current C (V rms)',
+						title: 'Output Current C (I rms)',
 						width: '100%'
 					},
 					demand: {
@@ -159,7 +159,7 @@
 						width: '100%'
 					},
 					output_frequency: {
-						title: 'Age   ',
+						title: 'Output Frenquency',
 						width: '100%'
 					},
 					inverter_temperature: {

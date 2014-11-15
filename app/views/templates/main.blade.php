@@ -282,7 +282,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a id="dashboard_link" href=<?php URL::route('main');?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a id="dashboard_link" href={{ URL::route('main') }}><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -415,7 +415,7 @@
                 
             </div>
             <!-- /.row -->
-            <div id="center_content" style="overflow-x: auto">
+            <div id="center_content">
             @yield('content')
             </div>
         </div>

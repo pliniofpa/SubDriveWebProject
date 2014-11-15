@@ -17,10 +17,12 @@
 
 {{-- Passes content to main template. --}}
 @section('content')
+<div id="center_content" style="overflow-x: auto">
 	@yield('table_content')
+</div>	
 @stop
 
 {{-- Passes title to main template. --}}
 @section('title')
-	@yield('title')
+@yield('title')
 @stop

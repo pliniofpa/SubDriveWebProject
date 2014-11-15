@@ -103,6 +103,7 @@ class ImportingController extends BaseController {
 	// Controller of importing data to General Info Table
 	public function importGeneralInfo() {
 		$assoc_array = array ();
+		$assoc_array['created_at'] = DB::select('NOW()');	
 		// Fields for Drive Status
 		if (array_key_exists ( 'CTFT', Input::all () ) && array_key_exists ( 'DVST', Input::all () )) {
 			$fault_state = ( int ) Input::get ( 'CTFT' );
