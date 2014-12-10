@@ -103,10 +103,9 @@ class ImportingController extends BaseController {
 	// Controller of importing data to General Info Table
 	public function importGeneralInfo() {
 		$assoc_array = array ();
-		$assoc_array['created_at'] = DB::select('NOW()');	
 		// Fields for Drive Status
 		if (array_key_exists ( 'CTFT', Input::all () ) && array_key_exists ( 'DVST', Input::all () )) {
-			$fault_state = ( int ) Input::get ( 'CTFT' );
+			$faultState = ( int ) Input::get ( 'CTFT' );
 			$drive_state = ( int ) Input::get ( 'DVST' );
 			if ($faultState > 0) {
 				$assoc_array ['drive_status'] = "Fault";
@@ -191,7 +190,9 @@ class ImportingController extends BaseController {
 		$subdrive_record = DB::table ( 'subdrives' )->where ( 'serial_number', Route::input ( 'serial_number' ) );
 		$subdrive_id = 1;
 		if ($subdrive_record) {
-			$subdrive_id = $subdrive_record->id;
+			if (isset ( $subdrive_record->id )) {
+				$subdrive_id = $subdrive_record->id;
+			}
 		}
 		$assoc_array ['subdrive_id'] = $subdrive_id;
 		$ok = DB::table ( 'general_info' )->insert ( $assoc_array ); // ->where('serial_number',"=",Route::input('serial_number'))->count ();
@@ -222,7 +223,7 @@ class ImportingController extends BaseController {
 				'exb_errors_on_this_cycle' => Input::get ( 'EXBERRCMSB' ) == null || Input::get ( 'EXBERRCLSB' ) == null ? null : ( double ) ((( int ) Input::get ( 'EXBERRCMSB' )) * 65536 + (( int ) Input::get ( 'EXBERRCLSB' ))),
 				'mcb_total_errors' => Input::get ( 'MCBTERRMSB' ) == null || Input::get ( 'MCBTERRLSB' ) == null ? null : ( double ) ((( int ) Input::get ( 'MCBTERRMSB' )) * 65536 + (( int ) Input::get ( 'MCBTERRLSB' ))),
 				'mcb_errors_at_powerup' => Input::get ( 'MCBERRPMSB' ) == null || Input::get ( 'MCBERRPLSB' ) == null ? null : ( double ) ((( int ) Input::get ( 'MCBERRPMSB' )) * 65536 + (( int ) Input::get ( 'MCBERRPLSB' ))),
-				'mcb_errors_on_this_cycle' => Input::get ( 'MCBERRCMSB' ) == null || Input::get ( 'MCBERRCLSB' ) == null ? null : ( double ) ((( int ) Input::get ( 'MCBERRCMSB' )) * 65536 + (( int ) Input::get ( 'MCBERRCLSB' ))),
+				'mcb_errors_on_this_cycle' => Input::get ( 'MCBERRCMSB' ) == null || Input::get ( 'MCBERRCLSB' ) == null ? null : ( double ) ((( int ) Input::get ( 'MCBERRCMSB' )) * 65536 + (( int ) Input::get ( 'MCBERRCLSB' ))) 
 		);
 		$subdrive_record = DB::table ( 'subdrives' )->where ( 'serial_number', Route::input ( 'serial_number' ) );
 		$subdrive_id = 1;
@@ -470,8 +471,8 @@ class ImportingController extends BaseController {
 	public function importOverloadHistory() {
 		$assoc_array = array ();
 		$assoc_array += ImportingController::converttoDHM ( 'total' );
-		//$assoc_array += ImportingController::converttoDHM ( 'this_cycle' );
-				
+		// $assoc_array += ImportingController::converttoDHM ( 'this_cycle' );
+		
 		// Fields for a set of Total Events /*FaultEventInfo[3] and FaultEventInfo[2] */
 		if (array_key_exists ( 'TEVENMSB', Input::all () ) && array_key_exists ( 'TEVENLSB', Input::all () )) {
 			$tempValue = ( double ) ((( int ) Input::get ( 'TEVENMSB' )) * 65536 + (( int ) Input::get ( 'TEVENLSB' )));
@@ -504,12 +505,12 @@ class ImportingController extends BaseController {
 	public function importPowerOnTimeHistory() {
 		$assoc_array = array ();
 		$assoc_array += ImportingController::converttoDHM ( 'total' );
-		$assoc_array += ImportingController::converttoDHM ( 'this_cycle' );	
-	
+		$assoc_array += ImportingController::converttoDHM ( 'this_cycle' );
+		
 		$assoc_array += array (
-				'log_number' => Input::get ( 'LOGN' ) == null ? null : ( int ) Input::get ( 'LOGN' )
+				'log_number' => Input::get ( 'LOGN' ) == null ? null : ( int ) Input::get ( 'LOGN' ) 
 		);
-	
+		
 		$subdrive_record = DB::table ( 'subdrives' )->where ( 'serial_number', Route::input ( 'serial_number' ) );
 		$subdrive_id = 1;
 		if ($subdrive_record) {
@@ -533,13 +534,13 @@ class ImportingController extends BaseController {
 		$assoc_array = array ();
 		$assoc_array += ImportingController::converttoDHM ( 'total' );
 		$assoc_array += ImportingController::converttoDHM ( 'this_cycle' );
-	
+		
 		$assoc_array += array (
 				'log_number' => Input::get ( 'LOGN' ) == null ? null : ( int ) Input::get ( 'LOGN' ),
 				'reset_source' => Input::get ( 'RSTSRC' ),
-				'reset_type' => Input::get ( 'RSTTYPE' )				
+				'reset_type' => Input::get ( 'RSTTYPE' ) 
 		);
-	
+		
 		$subdrive_record = DB::table ( 'subdrives' )->where ( 'serial_number', Route::input ( 'serial_number' ) );
 		$subdrive_id = 1;
 		if ($subdrive_record) {
@@ -563,7 +564,7 @@ class ImportingController extends BaseController {
 		$assoc_array = array ();
 		$assoc_array += ImportingController::converttoDHM ( 'total' );
 		$assoc_array += ImportingController::converttoDHM ( 'this_cycle' );
-	
+		
 		// Fields for a set of Total Events /*FaultEventInfo[5] and FaultEventInfo[4] */
 		if (array_key_exists ( 'TEVENMSB', Input::all () ) && array_key_exists ( 'TEVENLSB', Input::all () )) {
 			$tempValue = ( double ) ((( int ) Input::get ( 'TEVENMSB' )) * 65536 + (( int ) Input::get ( 'TEVENLSB' )));
@@ -586,9 +587,9 @@ class ImportingController extends BaseController {
 				'log_number' => Input::get ( 'LOGN' ) == null ? null : ( int ) Input::get ( 'LOGN' ),
 				'reset_source' => Input::get ( 'TEMPSRC' ),
 				'inverter_temperature' => Input::get ( 'ITMP' ) == null ? null : (( float ) Input::get ( 'ITMP' )) / 10,
-				'pfc_temperature' => Input::get ( 'PTMP' ) == null ? null : (( float ) Input::get ( 'PTMP' )) / 10
+				'pfc_temperature' => Input::get ( 'PTMP' ) == null ? null : (( float ) Input::get ( 'PTMP' )) / 10 
 		);
-	
+		
 		$subdrive_record = DB::table ( 'subdrives' )->where ( 'serial_number', Route::input ( 'serial_number' ) );
 		$subdrive_id = 1;
 		if ($subdrive_record) {

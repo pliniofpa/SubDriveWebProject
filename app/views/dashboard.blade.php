@@ -52,7 +52,7 @@ $assoc_array = array(
 		'output_current_a' => 'Output Current A (I rms)',
 		'output_current_b' => 'Output Current B (I rms)',
 		'output_current_c' => 'Output Current C (I rms)',
-		'output_current_c' => '% Demand',
+		'demand' => '% Demand',
 		'drive_status' => 'Drive Status',
 		'hp_kw' => 'HP / kW',
 		'fe_connect_dip' => 'FE Connect Dip Switch',
@@ -95,11 +95,14 @@ foreach ($assoc_array as $column => $label){
 
 @section('content')
 	<!-- Content Here -->
-	<div style="overflow: none" class="row">
+	<div class="row">
 	@foreach($result_array as $label => $value)
-	<div class="col-xs-6 col-sm-4 col-lg-3"><b>{{$label.": "}}</b>{{$value}}</div>
+	<div class="col-xs-6"><b>{{$label.": "}}</b>{{$value}}</div>
 	@endforeach
-	</div>	
+	</div>
+	<div class="row">
+	<h1 class="col-xs-12 page-header"></h1>
+	</div>
 @stop
 
 

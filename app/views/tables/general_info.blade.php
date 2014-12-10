@@ -27,12 +27,9 @@
 				},
 				fields: {
 					id: {
-						key: true,
-						list: false
-					},
-					number: {
 						title: '#      ',
-						width: '10%'
+						key: true,
+						list: true
 					},
 					hardware_version: {
 						title: "Hardware Version",

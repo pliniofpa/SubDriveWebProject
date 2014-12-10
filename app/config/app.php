@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost/SubDriveWebProject',
+	'url' => 'http://010-andrp-1g8f9',
 
 	/*
 	|--------------------------------------------------------------------------

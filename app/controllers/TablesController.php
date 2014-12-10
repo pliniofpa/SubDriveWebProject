@@ -25,12 +25,12 @@ class TablesController extends BaseController {
 		
 		if (Input::get ( "jtSorting" )) {
 			$search = explode ( " ", Input::get ( "jtSorting" ) );
-			if(Input::get ( "jtStartIndex" ) && Input::get ( "jtPageSize" ))
+			if(Input::get ( "jtPageSize" ))
 				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->skip ( Input::get ( "jtStartIndex" ) )->take ( Input::get ( "jtPageSize" ) )->orderBy ( $search [0], $search [1] )->get ();
 			else
 				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->orderBy ( $search [0], $search [1] )->get ();
 		} else {
-			if(Input::get ( "jtStartIndex" ) && Input::get ( "jtPageSize" ))
+			if(Input::get ( "jtPageSize" ))
 				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->skip ( Input::get ( "jtStartIndex" ) )->take ( Input::get ( "jtPageSize" ) )->get ();
 			else
 				$data = DB::table (Route::input('table_name'))->where('subdrive_id',$subdrive_id)->get ();
