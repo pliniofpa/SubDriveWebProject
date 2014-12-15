@@ -6,7 +6,7 @@
 {{"Fault History - $serial_number"}}
 @stop
 @section('table_content')
-<div id="fault_hist" style="width: 6400px;"></div>
+<div id="fault_hist" class="jtable_table" style="width: 6400px;"></div>
 	<script type="text/javascript">
 
 		$(document).ready(function () 

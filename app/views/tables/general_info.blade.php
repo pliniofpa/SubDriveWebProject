@@ -6,7 +6,7 @@
 {{"General Information - $serial_number"}}
 @stop
 @section('table_content')
-<div id="general_info" style="width: 5600px;"></div>
+<div id="general_info" class="jtable_table" style="width: 5600px;"></div>
 	<script type="text/javascript">
 
 		$(document).ready(function () 
@@ -188,7 +188,7 @@
 			//Set current table menu active
 			$('#tables_link').addClass("active");
 			$('#general_info_table_link').addClass("active");
-
+			
 		});
 	</script>
 @stop

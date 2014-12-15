@@ -36,7 +36,7 @@ $('#dashboard_link').addClass("active");
 
 {{-- Passes content to main template. --}}
 <?php
-$serial_number = '12345678';
+$serial_number = '0000000SNNPG0';
 //Recover the last added item from general_info table 
 $general_info_table_last_row = DB::table('general_info')->where('serial_number',$serial_number)->latest()->first();
 //Create array that links table fiels with Labels

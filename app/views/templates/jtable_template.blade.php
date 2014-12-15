@@ -17,9 +17,22 @@
 
 {{-- Passes content to main template. --}}
 @section('content')
-<div id="center_content" style="overflow-x: auto">
+<div><input type="checkbox" id="auto_update" name="auto_update">Auto Update Table<br>
+</div>
+<div id="table_content" style="overflow-x: auto">
 	@yield('table_content')
-</div>	
+</div>
+<<script type="text/javascript">
+<!--
+//-->
+$(document).ready(function (){
+	setInterval(function(){
+		if($('#auto_update')[0].checked){
+			$('.jtable_table').jtable('load');
+		}
+		},2000);	
+});
+</script>	
 @stop
 
 {{-- Passes title to main template. --}}

@@ -7,7 +7,7 @@
 {{"Communication Event History - $serial_number"}}
 @stop
 @section('table_content')
-<div id="communication_event_history" style="width: 2400px;"></div>
+<div id="communication_event_history" class="jtable_table" style="width: 2400px;"></div>
 	<script type="text/javascript">
 
 		$(document).ready(function () 

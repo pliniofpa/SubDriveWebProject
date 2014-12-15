@@ -6,7 +6,7 @@
 {{"Power On Time Event History - $serial_number"}}
 @stop
 @section('table_content')
-<div id="power_on_time_event_history" style="width: parent.width;"></div>
+<div id="power_on_time_event_history" class="jtable_table" style="width: parent.width;"></div>
 	<script type="text/javascript">
 
 		$(document).ready(function () 
