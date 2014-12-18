@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="SubDrive Web System by Franklin Electric">
-    <meta name="author" content="Plínio Andrade <pandrade@fele.com>">
+    <meta name="author" content="Plínio Andrade &ltpandrade@fele.com&gt">
 
     <title>SubDrive Web System @yield('title')</title>
 

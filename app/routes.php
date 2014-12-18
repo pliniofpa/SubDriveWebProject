@@ -19,8 +19,25 @@
 
 Route::get('/', array('as' => 'main',function()
 {
-	return View::make('dashboard');
+	if(Auth::check()){
+		return Redirect::to('/dashboard');
+	}else{
+		return Redirect::to('/login');
+	}
+	
 }));
+Route::get('/login', array('as' => 'login',function()
+{
+	return View::make('login');
+}));
+Route::get('/register', array('as' => 'register',function()
+{
+	return View::make('register');
+}));
+
+Route::post('/register', array('as' => 'register_post','uses'=> 'HomeController@userRegister'));
+
+Route::post('/login', array('as' => 'login_post','uses'=> 'HomeController@userLogin'));
 
 //Tables Show Route - This route show the Jtable 
 Route::get('/{table_name}/{serial_number}', array('as'=>'show_table_route', function ($table_name,$serial_number){
